@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — TopPicks</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="admin-body">
+
+<header class="admin-header">
+  <div class="header-inner">
+    <a href="../index.html" class="logo">&#9733; Top<span>Picks</span></a>
+    <a href="../index.html" class="header-cta">← View Site</a>
+  </div>
+</header>
+
+<div class="admin-layout">
+  <h1 class="admin-title">Product Dashboard</h1>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">Total Products</div>
+      <div class="stat-value" id="stat-total">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Tech</div>
+      <div class="stat-value" id="stat-tech">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Home</div>
+      <div class="stat-value" id="stat-home">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Kitchen</div>
+      <div class="stat-value" id="stat-kitchen">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Lifestyle</div>
+      <div class="stat-value" id="stat-lifestyle">—</div>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <input id="admin-search" class="admin-search" type="search" placeholder="Search products…" autocomplete="off">
+      <select id="cat-filter" class="filter-select">
+        <option value="all">All categories</option>
+        <option value="tech">Tech</option>
+        <option value="home">Home</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="lifestyle">Lifestyle</option>
+      </select>
+    </div>
+    <button id="btn-add" class="btn-add">+ Add Product</button>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th style="width:56px"></th>
+          <th>Product</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Rating</th>
+          <th style="width:120px">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="product-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Add / Edit Modal -->
+<div id="modal-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="modal-title">Add Product</span>
+      <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="product-form" novalidate>
+        <input type="hidden" id="field-id">
+
+        <div class="form-group">
+          <label class="form-label" for="field-title">Title <span style="color:#ef4444">*</span></label>
+          <input class="form-control" id="field-title" type="text" placeholder="Product name" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="field-desc">Description <span style="color:#ef4444">*</span></label>
+          <textarea class="form-control" id="field-desc" placeholder="Short description…" required></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="field-category">Category <span style="color:#ef4444">*</span></label>
+            <select class="form-control" id="field-category" required>
+              <option value="">Select…</option>
+              <option value="tech">Tech</option>
+              <option value="home">Home</option>
+              <option value="kitchen">Kitchen</option>
+              <option value="lifestyle">Lifestyle</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="field-price">Price ($) <span style="color:#ef4444">*</span></label>
+            <input class="form-control" id="field-price" type="number" min="0" step="0.01" placeholder="0.00" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="field-rating">Rating (0–5)</label>
+            <input class="form-control" id="field-rating" type="number" min="0" max="5" step="0.1" placeholder="4.5">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="field-reviews">Review count</label>
+            <input class="form-control" id="field-reviews" type="number" min="0" step="1" placeholder="0">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="field-image">Image URL</label>
+          <input class="form-control" id="field-image" type="url" placeholder="https://…">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="field-affiliate">Amazon Affiliate URL <span style="color:#ef4444">*</span></label>
+          <input class="form-control" id="field-affiliate" type="url" placeholder="https://amazon.com/dp/…?tag=yourtag-20" required>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" id="btn-cancel">Cancel</button>
+      <button class="btn-save" id="btn-save">Save Product</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script src="../js/products.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

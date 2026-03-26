@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TopPicks — Curated Deals & Product Reviews</title>
+  <meta name="description" content="Handpicked, top-rated products with honest reviews. We find the best deals so you don't have to.">
+  <meta name="robots" content="index, follow">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">&#9733; Top<span>Picks</span></a>
+    <div class="search-bar">
+      <input id="search" type="search" placeholder="Search products…" autocomplete="off">
+    </div>
+    <a href="admin/dashboard.html" class="header-cta">Dashboard</a>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Deals that <span>earn you money</span></h1>
+  <p>Every link is tracked. Every purchase pays you a commission. Set it up once — earn forever.</p>
+</section>
+
+<div class="categories">
+  <div class="cat-pills">
+    <button class="cat-pill active" data-cat="all">All</button>
+    <button class="cat-pill" data-cat="tech">Tech</button>
+    <button class="cat-pill" data-cat="home">Home</button>
+    <button class="cat-pill" data-cat="kitchen">Kitchen</button>
+    <button class="cat-pill" data-cat="lifestyle">Lifestyle</button>
+  </div>
+</div>
+
+<section class="products-section">
+  <div class="section-header">
+    <h2>Top Picks</h2>
+    <span id="result-count" class="result-count">Loading…</span>
+  </div>
+  <div id="products-grid" class="products-grid"></div>
+  <div id="no-results" class="no-results hidden">
+    <p>No products found. Try a different search or category.</p>
+  </div>
+</section>
+
+<p class="disclaimer">As an Amazon Associate I earn from qualifying purchases.</p>
+
+<footer>
+  <p>© <span id="year"></span> TopPicks · <a href="admin/dashboard.html">Dashboard</a></p>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
