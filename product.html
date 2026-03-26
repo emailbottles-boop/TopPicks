@@ -125,11 +125,24 @@
     .related-section { margin-top: 3rem; }
     .related-section h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.25rem; }
 
-    .product-error {
-      text-align: center;
-      padding: 5rem 1rem;
-      color: var(--text-muted);
-    }
+    .product-error { text-align: center; padding: 5rem 1rem; color: var(--text-muted); }
+
+    .pros-section { margin-top: .25rem; }
+    .pros-section h3 { font-size: .88rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .5px; color: var(--text-muted); margin-bottom: .6rem; }
+    .pros-list { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
+    .pros-list li { font-size: .9rem; padding-left: 1.4rem; position: relative; }
+    .pros-list li::before { content: '✓'; position: absolute; left: 0;
+      color: var(--success); font-weight: 800; }
+
+    .trust-row { display: flex; gap: 1rem; flex-wrap: wrap; font-size: .78rem;
+      color: var(--text-muted); justify-content: center; }
+
+    .disclosure-inline { font-size: .75rem; color: var(--text-muted); text-align: center; }
+    .disclosure-inline a { color: var(--primary); }
+
+    .related-section { margin-top: 3rem; }
+    .related-section h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.25rem; }
 
     @media (max-width: 640px) {
       .product-layout { grid-template-columns: 1fr; }
@@ -153,14 +166,34 @@
   <p style="color:var(--text-muted);padding:4rem 0;text-align:center">Loading…</p>
 </div>
 
-<p class="disclaimer">As an Amazon Associate I earn from qualifying purchases.</p>
+<div id="email-bar" class="email-bar hidden">
+  <div class="email-bar-inner">
+    <span class="email-bar-text">&#127381; Get the best deals in your inbox</span>
+    <div class="email-bar-form">
+      <input id="email-input" type="email" placeholder="your@email.com" autocomplete="email">
+      <button onclick="subscribeEmail()">Subscribe</button>
+    </div>
+    <button class="email-bar-close" onclick="dismissEmailBar()" aria-label="Close">&#10005;</button>
+  </div>
+</div>
+
+<p class="disclaimer">
+  As an Amazon Associate I earn from qualifying purchases. ·
+  <a href="disclosure.html">Affiliate Disclosure</a>
+</p>
 
 <footer>
-  <p>© <span id="year"></span> TopPicks · <a href="admin/dashboard.html">Dashboard</a></p>
+  <p>
+    © <span id="year"></span> TopPicks ·
+    <a href="/">Home</a> ·
+    <a href="disclosure.html">Disclosure</a> ·
+    <a href="admin/dashboard.html">Dashboard</a>
+  </p>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </footer>
 
 <div id="toast" class="toast"></div>
+<script src="js/email-bar.js"></script>
 <script src="js/product.js"></script>
 </body>
 </html>

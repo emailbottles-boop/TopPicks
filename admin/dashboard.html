@@ -41,8 +41,12 @@
       <div class="stat-value" id="stat-lifestyle">—</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">Click Events</div>
+      <div class="stat-label">Clicks Tracked</div>
       <div class="stat-value" id="stat-clicks">—</div>
+    </div>
+    <div class="stat-card" style="cursor:pointer" onclick="exportEmails()" title="Click to export">
+      <div class="stat-label">Email Subscribers</div>
+      <div class="stat-value" id="stat-emails">—</div>
     </div>
   </div>
 
@@ -58,8 +62,9 @@
         <option value="lifestyle">Lifestyle</option>
       </select>
     </div>
-    <div style="display:flex;gap:.5rem">
-      <button id="btn-reset" class="btn-export" style="background:#64748b" title="Discard local edits and reload from data/products.json">Reset to JSON</button>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+      <button id="btn-export-emails" class="btn-export" style="background:#8b5cf6" title="Download subscriber emails as CSV">&#9993; Export Emails</button>
+      <button id="btn-reset" class="btn-export" style="background:#64748b">Reset to JSON</button>
       <button id="btn-export" class="btn-export">&#8659; Export JSON</button>
       <button id="btn-add" class="btn-add">+ Add Product</button>
     </div>
@@ -75,7 +80,7 @@
           <th>Category</th>
           <th>Price</th>
           <th>Rating</th>
-          <th style="width:130px">Actions</th>
+          <th style="width:140px">Actions</th>
         </tr>
       </thead>
       <tbody id="product-tbody"></tbody>
@@ -83,8 +88,8 @@
   </div>
 
   <p style="font-size:.78rem;color:var(--text-muted);margin-top:1rem">
-    Edits are saved to your browser. Click <strong>Export JSON</strong> to download
-    <code>products.json</code> and commit it to <code>data/</code> to make changes permanent.
+    Edits save to your browser instantly. Click <strong>Export JSON</strong> →
+    commit it to <code>data/products.json</code> to make them permanent on the live site.
   </p>
 </div>
 
@@ -99,6 +104,21 @@
       <form id="product-form" novalidate>
         <input type="hidden" id="field-id">
 
+        <!-- Amazon URL paste → auto-parse -->
+        <div class="form-group">
+          <label class="form-label" for="field-amazon-paste">Paste any Amazon URL to auto-fill</label>
+          <div style="display:flex;gap:.5rem">
+            <input class="form-control" id="field-amazon-paste" type="url"
+                   placeholder="https://www.amazon.com/dp/… or full product URL">
+            <button type="button" id="btn-parse-url" class="btn-save" style="white-space:nowrap">Fill &#8594;</button>
+          </div>
+          <p style="font-size:.75rem;color:var(--text-muted);margin-top:.3rem">
+            Extracts the clean product URL. Still fill in title, description, price and image manually.
+          </p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:1rem 0">
+
         <div class="form-group">
           <label class="form-label" for="field-title">Title <span style="color:#ef4444">*</span></label>
           <input class="form-control" id="field-title" type="text" placeholder="Product name" required>
@@ -106,7 +126,12 @@
 
         <div class="form-group">
           <label class="form-label" for="field-desc">Description <span style="color:#ef4444">*</span></label>
-          <textarea class="form-control" id="field-desc" placeholder="Short description…" required></textarea>
+          <textarea class="form-control" id="field-desc" placeholder="One or two sentences…" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="field-pros">Why we recommend it (one reason per line)</label>
+          <textarea class="form-control" id="field-pros" placeholder="Charges 3 devices at once&#10;Folds flat for travel&#10;Works with MacBook and Android" style="min-height:90px"></textarea>
         </div>
 
         <div class="form-row">
@@ -137,20 +162,33 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label" for="field-badge">Badge label <span style="color:var(--text-muted);font-weight:400">(optional)</span></label>
-          <input class="form-control" id="field-badge" type="text" placeholder="Best Seller">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="field-badge">Badge label</label>
+            <input class="form-control" id="field-badge" type="text" placeholder="Best Seller">
+          </div>
+          <div class="form-group" style="display:flex;align-items:center;gap:.5rem;padding-top:1.6rem">
+            <input type="checkbox" id="field-featured" style="width:16px;height:16px;cursor:pointer">
+            <label for="field-featured" style="font-size:.88rem;cursor:pointer">Featured on homepage</label>
+          </div>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="field-image">Image URL</label>
-          <input class="form-control" id="field-image" type="url" placeholder="https://m.media-amazon.com/…">
+          <input class="form-control" id="field-image" type="url"
+                 placeholder="https://m.media-amazon.com/images/…"
+                 oninput="previewImage(this.value)">
+          <div id="image-preview" style="margin-top:.6rem;display:none">
+            <img id="preview-img" src="" alt="Preview"
+                 style="width:80px;height:80px;object-fit:contain;border-radius:8px;border:1px solid var(--border);background:var(--surface2);padding:4px">
+          </div>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="field-amazon">Amazon Product URL <span style="color:#ef4444">*</span></label>
-          <input class="form-control" id="field-amazon" type="url" placeholder="https://www.amazon.com/dp/ASIN" required>
-          <p style="font-size:.75rem;color:var(--text-muted);margin-top:.3rem">Do not include a <code>?tag=</code> parameter — it is injected dynamically.</p>
+          <input class="form-control" id="field-amazon" type="url"
+                 placeholder="https://www.amazon.com/dp/ASIN" required>
+          <p style="font-size:.75rem;color:var(--text-muted);margin-top:.3rem">No <code>?tag=</code> needed — injected automatically.</p>
         </div>
 
         <div class="form-group">

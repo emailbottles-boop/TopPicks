@@ -7,7 +7,9 @@
     "rating": 4.8,
     "reviews": 12400,
     "description": "Charges a MacBook, phone, and tablet simultaneously. Travel-friendly and incredibly fast.",
+    "pros": ["Charges 3 devices at once", "Folds flat for travel", "Half the size of Apple's charger", "Works with MacBook, iPad, iPhone, Android"],
     "badge": "Best Seller",
+    "featured": false,
     "amazonUrl": "https://www.amazon.com/dp/B09C6XMPKB",
     "image": "https://m.media-amazon.com/images/I/61TTY5mJLPL._AC_SL1500_.jpg",
     "tags": ["charger", "usb-c", "travel"]
@@ -20,7 +22,9 @@
     "rating": 4.9,
     "reviews": 8300,
     "description": "Virtually silent clicks, ultra-fast scroll wheel. Works across 3 computers seamlessly.",
+    "pros": ["Near-silent clicking", "Scroll wheel adapts to content speed", "Switch between 3 computers with one button", "8,000 DPI precision sensor"],
     "badge": "Editor's Pick",
+    "featured": true,
     "amazonUrl": "https://www.amazon.com/dp/B09HM94VDS",
     "image": "https://m.media-amazon.com/images/I/61ni3t1ryQL._AC_SL1500_.jpg",
     "tags": ["mouse", "wireless", "productivity"]
@@ -33,7 +37,9 @@
     "rating": 4.7,
     "reviews": 54000,
     "description": "3-stage filtration, whisper-quiet. Cleans a 219 sq ft room in 12 minutes.",
+    "pros": ["Removes 99.97% of particles", "Quieter than a whisper at lowest setting", "No filter indicator light at night", "Covers up to 219 sq ft"],
     "badge": "Top Rated",
+    "featured": false,
     "amazonUrl": "https://www.amazon.com/dp/B07VVK39F7",
     "image": "https://m.media-amazon.com/images/I/61ZCE7XEGWL._AC_SL1500_.jpg",
     "tags": ["air purifier", "home", "health"]
@@ -46,7 +52,9 @@
     "rating": 4.8,
     "reviews": 31000,
     "description": "Glare-free display, 10 weeks of battery, waterproof. Best e-reader on the market.",
+    "pros": ["Reads like real paper in any light", "10-week battery life", "Fully waterproof — safe in the bath", "16GB holds thousands of books"],
     "badge": "Fan Favorite",
+    "featured": false,
     "amazonUrl": "https://www.amazon.com/dp/B09TMF6742",
     "image": "https://m.media-amazon.com/images/I/61Ww4abDRoL._AC_SY879_.jpg",
     "tags": ["kindle", "reading", "waterproof"]
@@ -59,7 +67,9 @@
     "rating": 4.7,
     "reviews": 120000,
     "description": "Pressure cooker, slow cooker, rice cooker, steamer, sauté pan, yogurt maker & warmer.",
+    "pros": ["Replaces 7 kitchen appliances", "Cooks meals up to 70% faster", "Set it and forget it", "Easy to clean — pot is dishwasher safe"],
     "badge": "Most Reviewed",
+    "featured": false,
     "amazonUrl": "https://www.amazon.com/dp/B00FLYWNYQ",
     "image": "https://m.media-amazon.com/images/I/71V1LoPTpJL._AC_SL1500_.jpg",
     "tags": ["instant pot", "kitchen", "cooking"]
@@ -72,7 +82,9 @@
     "rating": 4.6,
     "reviews": 9200,
     "description": "Sunrise alarm, white noise, and sleep sounds. Build a perfect wind-down routine.",
+    "pros": ["Sunrise alarm wakes you naturally", "40+ sleep sounds", "No phone needed after setup", "Proven to improve sleep quality"],
     "badge": "Staff Pick",
+    "featured": false,
     "amazonUrl": "https://www.amazon.com/dp/B0BYY94VY6",
     "image": "https://m.media-amazon.com/images/I/61LxRHfSjSL._AC_SL1500_.jpg",
     "tags": ["sleep", "alarm", "wellness"]
@@ -85,7 +97,9 @@
     "rating": 4.8,
     "reviews": 47000,
     "description": "540 MB/s transfer speed, shock-resistant metal casing. Fits in your pocket.",
+    "pros": ["540 MB/s — 5x faster than a hard drive", "Drop-resistant up to 6 feet", "Fits in your pocket", "Works with PC, Mac, iPhone, Android"],
     "badge": "Best Value",
+    "featured": false,
     "amazonUrl": "https://www.amazon.com/dp/B0874XN4D8",
     "image": "https://m.media-amazon.com/images/I/71KwWRJIMLL._AC_SL1300_.jpg",
     "tags": ["ssd", "storage", "portable"]
@@ -98,7 +112,9 @@
     "rating": 4.8,
     "reviews": 62000,
     "description": "Keeps drinks cold 24 hrs, hot 12 hrs. TempShield insulation. Lifetime warranty.",
+    "pros": ["Cold 24 hours, hot 12 hours", "Lifetime warranty — they mean it", "No sweat on the outside", "Fits most car cup holders"],
     "badge": "Classic Choice",
+    "featured": false,
     "amazonUrl": "https://www.amazon.com/dp/B01ACAX6WI",
     "image": "https://m.media-amazon.com/images/I/61o3IpWDuLL._AC_SL1500_.jpg",
     "tags": ["water bottle", "hydration", "outdoors"]
@@ -111,7 +127,9 @@
     "rating": 4.7,
     "reviews": 38500,
     "description": "Studio-quality sound for podcasts, streaming, gaming, and video calls.",
+    "pros": ["Plug-and-play — no drivers needed", "4 recording patterns for any situation", "Built-in headphone jack for zero-latency monitoring", "Used by professional podcasters worldwide"],
     "badge": "Creator Favorite",
+    "featured": false,
     "amazonUrl": "https://www.amazon.com/dp/B00N1YPXW2",
     "image": "https://m.media-amazon.com/images/I/81CqiSAHGCL._AC_SL1500_.jpg",
     "tags": ["microphone", "podcast", "streaming"]
@@ -124,7 +142,9 @@
     "rating": 4.6,
     "reviews": 18700,
     "description": "16 million colors, voice & app controlled. Transform your home lighting forever.",
+    "pros": ["Works with Alexa, Google, Apple HomeKit", "16 million colors", "Set schedules and automations", "No electrician needed — just screw in the bulbs"],
     "badge": "Smart Pick",
+    "featured": false,
     "amazonUrl": "https://www.amazon.com/dp/B014H2P42K",
     "image": "https://m.media-amazon.com/images/I/71-MVT3RFRL._AC_SL1500_.jpg",
     "tags": ["smart home", "lighting", "alexa"]
@@ -137,7 +157,9 @@
     "rating": 4.6,
     "reviews": 24000,
     "description": "Make ice cream, gelato, sorbet, and smoothie bowls from healthy ingredients.",
+    "pros": ["Make ice cream from protein shakes", "7 one-touch programs", "No ice or salt needed", "Results in under 5 minutes"],
     "badge": "Trending Now",
+    "featured": false,
     "amazonUrl": "https://www.amazon.com/dp/B08XTJLL6Z",
     "image": "https://m.media-amazon.com/images/I/71Y4k1eBBDL._AC_SL1500_.jpg",
     "tags": ["ice cream", "kitchen", "dessert"]
@@ -150,7 +172,9 @@
     "rating": 4.8,
     "reviews": 7600,
     "description": "Electric height adjustment, anti-collision tech. Supports up to 355 lbs.",
+    "pros": ["Adjusts height in 3 seconds", "Anti-collision stops if it hits something", "Holds up to 355 lbs — monitor arms included", "7-year warranty on the motor"],
     "badge": "Premium Pick",
+    "featured": false,
     "amazonUrl": "https://www.amazon.com/dp/B08DJBZGGL",
     "image": "https://m.media-amazon.com/images/I/71DEb3Gk6GL._AC_SL1500_.jpg",
     "tags": ["standing desk", "ergonomic", "home office"]

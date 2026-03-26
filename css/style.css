@@ -86,6 +86,41 @@ footer a{color:#60a5fa}
 /* ── Utility ── */
 .hidden{display:none!important}
 
+/* ── Featured product ── */
+.featured-section{max-width:1200px;margin:2rem auto 0;padding:0 20px}
+.featured-inner{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%);border-radius:16px;padding:2rem;display:grid;grid-template-columns:180px 1fr;gap:2rem;align-items:center;color:white}
+.featured-img{background:rgba(255,255,255,.12);border-radius:12px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:.75rem}
+.featured-img img{max-width:100%;max-height:160px;object-fit:contain}
+.featured-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;opacity:.8;display:block;margin-bottom:.5rem}
+.featured-title{font-size:1.3rem;font-weight:800;margin-bottom:.5rem;line-height:1.3}
+.featured-desc{font-size:.9rem;opacity:.85;margin-bottom:1rem;line-height:1.5}
+.featured-footer{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.featured-price{font-size:1.5rem;font-weight:900}
+.featured-section .buy-btn{background:white;color:var(--primary);padding:.65rem 1.3rem}
+.featured-section .buy-btn:hover{background:#f0f9ff}
+@media(max-width:640px){
+  .featured-inner{grid-template-columns:1fr;text-align:center}
+  .featured-img{max-width:140px;margin:0 auto}
+  .featured-footer{justify-content:center}
+}
+
+/* ── Email capture bar ── */
+.email-bar{position:fixed;bottom:0;left:0;right:0;background:#1e293b;color:white;z-index:90;border-top:2px solid #334155}
+.email-bar-inner{max-width:1200px;margin:0 auto;padding:.85rem 1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.email-bar-text{font-size:.9rem;font-weight:600;flex-shrink:0}
+.email-bar-form{display:flex;gap:.5rem;flex:1;min-width:200px;max-width:360px}
+.email-bar-form input{flex:1;padding:.5rem .9rem;border-radius:8px;border:none;font-size:.88rem;outline:none;background:#334155;color:white}
+.email-bar-form input::placeholder{color:#94a3b8}
+.email-bar-form input:focus{background:#475569}
+.email-bar-form button{padding:.5rem 1rem;background:var(--success);color:white;border:none;border-radius:8px;font-weight:700;font-size:.85rem;cursor:pointer;white-space:nowrap}
+.email-bar-form button:hover{opacity:.9}
+.email-bar-close{background:none;border:none;color:#94a3b8;font-size:1.1rem;cursor:pointer;padding:.25rem;margin-left:auto;flex-shrink:0}
+.email-bar-close:hover{color:white}
+@media(max-width:640px){
+  .email-bar-text{display:none}
+  .email-bar-form{max-width:100%}
+}
+
 /* ── Responsive ── */
 @media(max-width:640px){
   .header-inner{gap:12px}

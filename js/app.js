@@ -16,7 +16,7 @@ if (localOverride) {
   try {
     allProducts = JSON.parse(localOverride);
     if (!associateTag) showSetupModal();
-    else render();
+    else boot();
   } catch (_) {
     loadFromJSON();
   }
@@ -30,12 +30,49 @@ function loadFromJSON() {
     .then(data => {
       allProducts = data;
       if (!associateTag) showSetupModal();
-      else render();
+      else boot();
     })
     .catch(() => {
       grid.innerHTML = '<div class="empty-state"><p>Could not load products. Must be served via GitHub Pages or a local server.</p></div>';
       countEl.textContent = '0 products';
     });
+}
+
+function boot() {
+  renderFeatured();
+  render();
+}
+
+function renderFeatured() {
+  const wrap = document.getElementById('featured-wrap');
+  if (!wrap) return;
+  const featured = allProducts.find(p => p.featured);
+  if (!featured) return;
+  const url = affiliateUrl(featured.amazonUrl);
+  wrap.innerHTML = `
+    <div class="featured-section">
+      <div class="featured-inner">
+        <div class="featured-img">
+          <img src="${esc(featured.image)}" alt="${esc(featured.title)}"
+               onerror="this.style.opacity='.3'">
+        </div>
+        <div class="featured-body">
+          <span class="featured-label">&#9733; Featured Pick</span>
+          <h2 class="featured-title">${esc(featured.title)}</h2>
+          <p class="featured-desc">${esc(featured.description)}</p>
+          <div class="featured-footer">
+            <span class="featured-price">${esc(featured.price)}</span>
+            <a href="${esc(url)}"
+               class="buy-btn"
+               target="_blank"
+               rel="noopener sponsored"
+               onclick="track(${featured.id},'${esc(featured.title).replace(/'/g,'&#39;')}')">
+              View Deal &#8594;
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>`;
 }
 
 function showSetupModal() {
@@ -82,7 +119,7 @@ function saveTag() {
   associateTag = val;
   localStorage.setItem('amazon_tag', val);
   document.getElementById('setup-overlay').remove();
-  render();
+  boot();
   showToast('Tag saved! All links are now active.');
 }
 
