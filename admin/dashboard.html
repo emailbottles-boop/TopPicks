@@ -11,7 +11,7 @@
 <header class="admin-header">
   <div class="header-inner">
     <a href="../index.html" class="logo">&#9733; Top<span>Picks</span></a>
-    <a href="../index.html" class="header-cta">← View Site</a>
+    <a href="../index.html" class="header-cta">&#8592; View Site</a>
   </div>
 </header>
 
@@ -40,6 +40,10 @@
       <div class="stat-label">Lifestyle</div>
       <div class="stat-value" id="stat-lifestyle">—</div>
     </div>
+    <div class="stat-card">
+      <div class="stat-label">Click Events</div>
+      <div class="stat-value" id="stat-clicks">—</div>
+    </div>
   </div>
 
   <!-- Toolbar -->
@@ -54,7 +58,11 @@
         <option value="lifestyle">Lifestyle</option>
       </select>
     </div>
-    <button id="btn-add" class="btn-add">+ Add Product</button>
+    <div style="display:flex;gap:.5rem">
+      <button id="btn-reset" class="btn-export" style="background:#64748b" title="Discard local edits and reload from data/products.json">Reset to JSON</button>
+      <button id="btn-export" class="btn-export">&#8659; Export JSON</button>
+      <button id="btn-add" class="btn-add">+ Add Product</button>
+    </div>
   </div>
 
   <!-- Table -->
@@ -67,12 +75,17 @@
           <th>Category</th>
           <th>Price</th>
           <th>Rating</th>
-          <th style="width:120px">Actions</th>
+          <th style="width:130px">Actions</th>
         </tr>
       </thead>
       <tbody id="product-tbody"></tbody>
     </table>
   </div>
+
+  <p style="font-size:.78rem;color:var(--text-muted);margin-top:1rem">
+    Edits are saved to your browser. Click <strong>Export JSON</strong> to download
+    <code>products.json</code> and commit it to <code>data/</code> to make changes permanent.
+  </p>
 </div>
 
 <!-- Add / Edit Modal -->
@@ -108,8 +121,8 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label" for="field-price">Price ($) <span style="color:#ef4444">*</span></label>
-            <input class="form-control" id="field-price" type="number" min="0" step="0.01" placeholder="0.00" required>
+            <label class="form-label" for="field-price">Price <span style="color:#ef4444">*</span></label>
+            <input class="form-control" id="field-price" type="text" placeholder="$0.00" required>
           </div>
         </div>
 
@@ -125,13 +138,24 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="field-image">Image URL</label>
-          <input class="form-control" id="field-image" type="url" placeholder="https://…">
+          <label class="form-label" for="field-badge">Badge label <span style="color:var(--text-muted);font-weight:400">(optional)</span></label>
+          <input class="form-control" id="field-badge" type="text" placeholder="Best Seller">
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="field-affiliate">Amazon Affiliate URL <span style="color:#ef4444">*</span></label>
-          <input class="form-control" id="field-affiliate" type="url" placeholder="https://amazon.com/dp/…?tag=yourtag-20" required>
+          <label class="form-label" for="field-image">Image URL</label>
+          <input class="form-control" id="field-image" type="url" placeholder="https://m.media-amazon.com/…">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="field-amazon">Amazon Product URL <span style="color:#ef4444">*</span></label>
+          <input class="form-control" id="field-amazon" type="url" placeholder="https://www.amazon.com/dp/ASIN" required>
+          <p style="font-size:.75rem;color:var(--text-muted);margin-top:.3rem">Do not include a <code>?tag=</code> parameter — it is injected dynamically.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="field-tags">Tags <span style="color:var(--text-muted);font-weight:400">(comma-separated)</span></label>
+          <input class="form-control" id="field-tags" type="text" placeholder="usb-c, travel, charger">
         </div>
       </form>
     </div>
@@ -145,7 +169,6 @@
 <!-- Toast -->
 <div id="toast" class="toast"></div>
 
-<script src="../js/products.js"></script>
 <script src="admin.js"></script>
 </body>
 </html>
