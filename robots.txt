@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://emailbottles-boop.github.io/amazon/sitemap.xml

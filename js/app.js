@@ -138,28 +138,30 @@ function affiliateUrl(base) {
 }
 
 function cardHTML(p) {
-  const reviews = p.reviews >= 1000 ? (p.reviews / 1000).toFixed(1) + 'k' : p.reviews;
-  const full    = Math.floor(p.rating);
-  const half    = p.rating % 1 >= 0.5 ? 1 : 0;
-  const empty   = 5 - full - half;
-  const stars   = '&#9733;'.repeat(full) + (half ? '&#189;' : '') + '&#9734;'.repeat(empty);
-  // Escape title for use inside an onclick JS string (single-quoted)
+  const reviews    = p.reviews >= 1000 ? (p.reviews / 1000).toFixed(1) + 'k' : p.reviews;
+  const full       = Math.floor(p.rating);
+  const half       = p.rating % 1 >= 0.5 ? 1 : 0;
+  const empty      = 5 - full - half;
+  const stars      = '&#9733;'.repeat(full) + (half ? '&#189;' : '') + '&#9734;'.repeat(empty);
   const titleForJs = esc(p.title).replace(/'/g, '&#39;');
+  const pageUrl    = `product.html?id=${p.id}`;
   return `
     <article class="card">
-      <div class="card-img">
-        ${p.badge ? `<span class="badge">${esc(p.badge)}</span>` : ''}
-        <img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy" onerror="this.style.opacity='.3'">
-      </div>
-      <div class="card-body">
-        <div class="card-title">${esc(p.title)}</div>
-        <div class="card-desc">${esc(p.description)}</div>
-        <div class="card-rating">
-          <span class="stars">${stars}</span>
-          <strong>${p.rating}</strong>
-          <span class="review-count">(${reviews})</span>
+      <a href="${pageUrl}" style="display:contents;text-decoration:none;color:inherit">
+        <div class="card-img">
+          ${p.badge ? `<span class="badge">${esc(p.badge)}</span>` : ''}
+          <img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy" onerror="this.style.opacity='.3'">
         </div>
-      </div>
+        <div class="card-body">
+          <div class="card-title">${esc(p.title)}</div>
+          <div class="card-desc">${esc(p.description)}</div>
+          <div class="card-rating">
+            <span class="stars">${stars}</span>
+            <strong>${p.rating}</strong>
+            <span class="review-count">(${reviews})</span>
+          </div>
+        </div>
+      </a>
       <div class="card-footer">
         <span class="price">${esc(p.price)}</span>
         <a href="${esc(affiliateUrl(p.amazonUrl))}"
