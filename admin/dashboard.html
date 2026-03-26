@@ -16,82 +16,110 @@
 </header>
 
 <div class="admin-layout">
-  <h1 class="admin-title">Product Dashboard</h1>
 
-  <!-- Stats -->
-  <div class="stats-row">
-    <div class="stat-card">
-      <div class="stat-label">Total Products</div>
-      <div class="stat-value" id="stat-total">—</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Tech</div>
-      <div class="stat-value" id="stat-tech">—</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Home</div>
-      <div class="stat-value" id="stat-home">—</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Kitchen</div>
-      <div class="stat-value" id="stat-kitchen">—</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Lifestyle</div>
-      <div class="stat-value" id="stat-lifestyle">—</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Clicks Tracked</div>
-      <div class="stat-value" id="stat-clicks">—</div>
-    </div>
-    <div class="stat-card" style="cursor:pointer" onclick="exportEmails()" title="Click to export">
-      <div class="stat-label">Email Subscribers</div>
-      <div class="stat-value" id="stat-emails">—</div>
-    </div>
+  <!-- Tabs -->
+  <div class="admin-tabs">
+    <button class="admin-tab active" data-tab="products">&#128230; Products</button>
+    <button class="admin-tab"        data-tab="settings">&#9881; Settings</button>
   </div>
 
-  <!-- Toolbar -->
-  <div class="toolbar">
-    <div class="toolbar-left">
-      <input id="admin-search" class="admin-search" type="search" placeholder="Search products…" autocomplete="off">
-      <select id="cat-filter" class="filter-select">
-        <option value="all">All categories</option>
-        <option value="tech">Tech</option>
-        <option value="home">Home</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="lifestyle">Lifestyle</option>
-      </select>
+  <!-- ── PRODUCTS TAB ── -->
+  <div id="tab-products" class="tab-pane">
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Total Products</div>
+        <div class="stat-value" id="stat-total">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Clicks Tracked</div>
+        <div class="stat-value" id="stat-clicks">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Subscribers</div>
+        <div class="stat-value" id="stat-emails">—</div>
+      </div>
     </div>
-    <div style="display:flex;gap:.5rem;flex-wrap:wrap">
-      <button id="btn-export-emails" class="btn-export" style="background:#8b5cf6" title="Download subscriber emails as CSV">&#9993; Export Emails</button>
-      <button id="btn-reset" class="btn-export" style="background:#64748b">Reset to JSON</button>
-      <button id="btn-export" class="btn-export">&#8659; Export JSON</button>
+
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <input id="admin-search" class="admin-search" type="search" placeholder="Search products…" autocomplete="off">
+        <select id="cat-filter" class="filter-select">
+          <option value="all">All categories</option>
+          <option value="tech">Tech</option>
+          <option value="home">Home</option>
+          <option value="kitchen">Kitchen</option>
+          <option value="lifestyle">Lifestyle</option>
+        </select>
+      </div>
       <button id="btn-add" class="btn-add">+ Add Product</button>
     </div>
-  </div>
 
-  <!-- Table -->
-  <div class="table-wrap">
-    <table class="admin-table">
-      <thead>
-        <tr>
-          <th style="width:56px"></th>
-          <th>Product</th>
-          <th>Category</th>
-          <th>Price</th>
-          <th>Rating</th>
-          <th style="width:140px">Actions</th>
-        </tr>
-      </thead>
-      <tbody id="product-tbody"></tbody>
-    </table>
-  </div>
+    <div class="table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th style="width:56px"></th>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Rating</th>
+            <th style="width:130px">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="product-tbody"></tbody>
+      </table>
+    </div>
 
-  <p style="font-size:.78rem;color:var(--text-muted);margin-top:1rem">
-    Edits save to your browser instantly. Click <strong>Export JSON</strong> →
-    commit it to <code>data/products.json</code> to make them permanent on the live site.
-  </p>
-</div>
+  </div><!-- /tab-products -->
+
+  <!-- ── SETTINGS TAB ── -->
+  <div id="tab-settings" class="tab-pane hidden">
+
+    <div class="settings-grid">
+
+      <!-- Affiliate tag -->
+      <div class="settings-card">
+        <div class="settings-card-icon">&#128279;</div>
+        <h3>Affiliate Tag</h3>
+        <p>Your Amazon Associates tag. Every link on the site uses this automatically.</p>
+        <div class="settings-input-row">
+          <input id="settings-tag" class="form-control" type="text"
+                 placeholder="yourname-20" autocomplete="off">
+          <button class="btn-save" id="btn-save-tag">Save</button>
+        </div>
+        <p id="settings-tag-status" class="settings-status"></p>
+      </div>
+
+      <!-- Email subscribers -->
+      <div class="settings-card">
+        <div class="settings-card-icon">&#9993;</div>
+        <h3>Email Subscribers</h3>
+        <p id="settings-email-desc">People who signed up via the email bar on your site.</p>
+        <button class="btn-export" id="btn-export-emails">&#8659; Download as CSV</button>
+      </div>
+
+      <!-- Product backup -->
+      <div class="settings-card">
+        <div class="settings-card-icon">&#128190;</div>
+        <h3>Back Up Products</h3>
+        <p>Download your product list as a JSON file. Save this to make your edits permanent after redeployment.</p>
+        <button class="btn-export" id="btn-export-json">&#8659; Download products.json</button>
+      </div>
+
+      <!-- Reset -->
+      <div class="settings-card">
+        <div class="settings-card-icon">&#9888;</div>
+        <h3>Reset Products</h3>
+        <p>Discard all edits and go back to the default product list.</p>
+        <button class="btn-export" style="background:#ef4444" id="btn-reset">Reset to defaults</button>
+      </div>
+
+    </div>
+
+  </div><!-- /tab-settings -->
+
+</div><!-- /admin-layout -->
 
 <!-- Add / Edit Modal -->
 <div id="modal-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -104,37 +132,31 @@
       <form id="product-form" novalidate>
         <input type="hidden" id="field-id">
 
-        <!-- Amazon URL paste → auto-parse -->
-        <div class="form-group">
-          <label class="form-label" for="field-amazon-paste">Paste any Amazon URL to auto-fill</label>
+        <!-- Step 1: Amazon URL -->
+        <div class="form-step">
+          <div class="form-step-label">Step 1 — Paste the Amazon product URL</div>
           <div style="display:flex;gap:.5rem">
             <input class="form-control" id="field-amazon-paste" type="url"
-                   placeholder="https://www.amazon.com/dp/… or full product URL">
-            <button type="button" id="btn-parse-url" class="btn-save" style="white-space:nowrap">Fill &#8594;</button>
+                   placeholder="https://www.amazon.com/dp/… or any Amazon product URL">
+            <button type="button" id="btn-parse-url" class="btn-save" style="white-space:nowrap;flex-shrink:0">Fill &#8594;</button>
           </div>
-          <p style="font-size:.75rem;color:var(--text-muted);margin-top:.3rem">
-            Extracts the clean product URL. Still fill in title, description, price and image manually.
+          <p style="font-size:.75rem;color:var(--text-muted);margin-top:.35rem">
+            Automatically extracts the clean Amazon link. You still fill in the rest below.
           </p>
         </div>
 
-        <hr style="border:none;border-top:1px solid var(--border);margin:1rem 0">
+        <div class="form-step-divider">Step 2 — Fill in the details</div>
 
         <div class="form-group">
-          <label class="form-label" for="field-title">Title <span style="color:#ef4444">*</span></label>
-          <input class="form-control" id="field-title" type="text" placeholder="Product name" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="field-desc">Description <span style="color:#ef4444">*</span></label>
-          <textarea class="form-control" id="field-desc" placeholder="One or two sentences…" required></textarea>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="field-pros">Why we recommend it (one reason per line)</label>
-          <textarea class="form-control" id="field-pros" placeholder="Charges 3 devices at once&#10;Folds flat for travel&#10;Works with MacBook and Android" style="min-height:90px"></textarea>
+          <label class="form-label" for="field-title">Product name <span style="color:#ef4444">*</span></label>
+          <input class="form-control" id="field-title" type="text" placeholder="e.g. Anker 65W USB-C Charger" required>
         </div>
 
         <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="field-price">Price <span style="color:#ef4444">*</span></label>
+            <input class="form-control" id="field-price" type="text" placeholder="$0.00" required>
+          </div>
           <div class="form-group">
             <label class="form-label" for="field-category">Category <span style="color:#ef4444">*</span></label>
             <select class="form-control" id="field-category" required>
@@ -145,56 +167,61 @@
               <option value="lifestyle">Lifestyle</option>
             </select>
           </div>
-          <div class="form-group">
-            <label class="form-label" for="field-price">Price <span style="color:#ef4444">*</span></label>
-            <input class="form-control" id="field-price" type="text" placeholder="$0.00" required>
-          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="field-desc">Description</label>
+          <textarea class="form-control" id="field-desc" placeholder="One or two sentences about this product…"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="field-pros">Why it's worth buying <span style="color:var(--text-muted);font-weight:400">(one reason per line)</span></label>
+          <textarea class="form-control" id="field-pros"
+                    placeholder="Charges 3 devices at once&#10;Folds flat for travel&#10;Works with MacBook and Android"
+                    style="min-height:80px"></textarea>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label" for="field-rating">Rating (0–5)</label>
+            <label class="form-label" for="field-rating">Star rating (0–5)</label>
             <input class="form-control" id="field-rating" type="number" min="0" max="5" step="0.1" placeholder="4.5">
           </div>
           <div class="form-group">
-            <label class="form-label" for="field-reviews">Review count</label>
+            <label class="form-label" for="field-reviews">No. of reviews</label>
             <input class="form-control" id="field-reviews" type="number" min="0" step="1" placeholder="0">
           </div>
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="field-badge">Badge label</label>
-            <input class="form-control" id="field-badge" type="text" placeholder="Best Seller">
-          </div>
-          <div class="form-group" style="display:flex;align-items:center;gap:.5rem;padding-top:1.6rem">
-            <input type="checkbox" id="field-featured" style="width:16px;height:16px;cursor:pointer">
-            <label for="field-featured" style="font-size:.88rem;cursor:pointer">Featured on homepage</label>
-          </div>
-        </div>
-
         <div class="form-group">
-          <label class="form-label" for="field-image">Image URL</label>
+          <label class="form-label" for="field-image">Product image URL</label>
           <input class="form-control" id="field-image" type="url"
                  placeholder="https://m.media-amazon.com/images/…"
                  oninput="previewImage(this.value)">
           <div id="image-preview" style="margin-top:.6rem;display:none">
             <img id="preview-img" src="" alt="Preview"
-                 style="width:80px;height:80px;object-fit:contain;border-radius:8px;border:1px solid var(--border);background:var(--surface2);padding:4px">
+                 style="width:72px;height:72px;object-fit:contain;border-radius:8px;border:1px solid var(--border);background:var(--surface2);padding:4px">
           </div>
         </div>
 
+        <!-- Hidden: filled by URL parser -->
         <div class="form-group">
-          <label class="form-label" for="field-amazon">Amazon Product URL <span style="color:#ef4444">*</span></label>
+          <label class="form-label" for="field-amazon">Amazon product URL <span style="color:#ef4444">*</span></label>
           <input class="form-control" id="field-amazon" type="url"
                  placeholder="https://www.amazon.com/dp/ASIN" required>
-          <p style="font-size:.75rem;color:var(--text-muted);margin-top:.3rem">No <code>?tag=</code> needed — injected automatically.</p>
+          <p style="font-size:.75rem;color:var(--text-muted);margin-top:.3rem">No affiliate tag needed — it's added automatically.</p>
         </div>
 
-        <div class="form-group">
-          <label class="form-label" for="field-tags">Tags <span style="color:var(--text-muted);font-weight:400">(comma-separated)</span></label>
-          <input class="form-control" id="field-tags" type="text" placeholder="usb-c, travel, charger">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="field-badge">Badge <span style="color:var(--text-muted);font-weight:400">(optional label)</span></label>
+            <input class="form-control" id="field-badge" type="text" placeholder="Best Seller">
+          </div>
+          <div class="form-group" style="display:flex;align-items:center;gap:.5rem;padding-top:1.6rem">
+            <input type="checkbox" id="field-featured" style="width:16px;height:16px;cursor:pointer">
+            <label for="field-featured" style="font-size:.88rem;cursor:pointer;font-weight:500">&#9733; Feature on homepage</label>
+          </div>
         </div>
+
       </form>
     </div>
     <div class="modal-footer">
@@ -204,9 +231,7 @@
   </div>
 </div>
 
-<!-- Toast -->
 <div id="toast" class="toast"></div>
-
 <script src="admin.js"></script>
 </body>
 </html>
